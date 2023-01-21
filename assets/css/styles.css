@@ -1,10 +1,11 @@
 body {
   font-family: Arial;
-  font-size: 120%;
+  font-size: 67.5%;
 }
 
 a {
   color: #563d7c;
+  font-size: 1.5rem;
   text-decoration: none;
   transition: color 0.1s;
 }
@@ -13,11 +14,97 @@ a:hover {
   color: #8570a5;
 }
 
+/* header and footer */
+
+
+header,
+footer {
+  text-align: center;
+  padding: 20px;
+  margin: 0 auto;
+  max-width: 800px;
+  border: solid 0.5rem var(--colorWhite);
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 8px 0px;
+  border-radius: 5px;
+  color: var(--colorWhite);
+}
+
+header {
+  background-color: var(--colorElectricBlue);
+  margin-bottom: 40px; 
+}
+
+footer {
+  margin-top: 40px; 
+  margin-bottom: 40px; 
+  font-size: 1.5rem;
+  background-color: var(--colorPinkDark);
+}
+
+header::after,
+footer::after {
+  content: " ";
+  display: block;
+  width: 100%;
+  height: 2px;
+}
+
+footer nav,
+.footerP, 
+.footerTag, 
+.footerCopyright {
+  font-size: 1.5rem;
+}
+
+.footerP {
+  font-style: italic;
+  padding-bottom: 20px;
+}
+
+.footerTags {
+  font-weight: bold;
+  padding-bottom: 20px;
+  color: var(--colorWheat);
+}
+
+.footerCopyright {
+  font-size: 1.2rem;
+  font-style: italic;
+}
+
+
+footer a {
+  font-size: 2.5rem;
+  font-family: 'Lato', 'Helvetica', 'Arial', 'sans-serif';
+  letter-spacing: 0.5rem;
+  text-transform: uppercase;
+  padding-right: 2px;
+  border: 0;
+  color: var(--fontvintage);
+}
+
+footer a,
+footer a:focus {
+  color: var(--fontvintage);
+}
+
+footer a:hover,
+footer a:focus:hover, 
+footer a.active:hover {
+  color: var(--colorElectricBlue);
+  text-shadow: 1px 1px var(--colorWheat);
+}
+
+footer {
+  display: none;
+}
+
+/* buttons */
 button {
   display: inline-block;
   margin: 5px;
   cursor: pointer;
-  font-size: 100%;
+  font-size: 2rem;
   background-color: #563d7c;
   border-radius: 5px;
   padding: 2px 10px;
@@ -62,6 +149,11 @@ li:nth-child(odd) {
   display: none;
 }
 
+.visible {
+  display: block;
+}
+
+
 .start {
   text-align: center;
 }
@@ -72,9 +164,14 @@ li:nth-child(odd) {
   left: 10px;
 }
 
+
+.choicesDiv{
+  color: black;
+} ;
+
 .feedback {
   font-style: italic;
-  font-size: 120%;
+  font-size: 1.22rem;
   margin-top: 20px;
   padding-top: 10px;
   color: gray;
@@ -83,6 +180,10 @@ li:nth-child(odd) {
 
 .timer {
   position: absolute;
+  font-size: 2rem;
+  color: var(--fontvintage);
+  background-color: var(--colorRed);
   top: 10px;
   right: 10px;
+  padding: 1rem;
 }

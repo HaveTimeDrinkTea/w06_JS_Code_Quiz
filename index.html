@@ -4,35 +4,42 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico" />
+    <script src="https://kit.fontawesome.com/72c3290151.js" crossorigin="anonymous"></script>
+    
     <title>Coding Quiz</title>
 
     <link rel="stylesheet" href="./assets/css/styles.css" />
+    <link rel="stylesheet" href="assets/css/myfavcolours.css" />
+  
   </head>
 
   <body>
+    <main>
     <div class="scores"><a href="highscores.html">View Highscores</a></div>
 
-    <div class="timer">Time: <span id="time">0</span></div>
+    <div class="timer">Time: <span id="timeCountDown">0</span></div>
 
     <div class="wrapper">
-      <div id="start-screen" class="start">
-        <h1>Coding Quiz Challenge</h1>
+      <div id="startScreen" class="start">
+        <h1><i class="fa-brands fa-square-js"></i> Coding Quiz Challenge</h1>
         <p>
           Try to answer the following code-related questions within the time
           limit. Keep in mind that incorrect answers will penalize your
           score/time by ten seconds!
         </p>
-        <button id="start">Start Quiz</button>
+        <button id="startButton">Start Quiz</button>
       </div>
 
-      <div id="questions" class="hide">
-        <h2 id="question-title"></h2>
-        <div id="choices" class="choices"></div>
+      <div id="questionsDiv" class="hide">
+        <h2 id="questionTitle">question here</h2>
+        <div id="questionChoicesDiv" class="choicesDiv"></div>
       </div>
 
-      <div id="end-screen" class="hide">
+      <div id="endScreen" class="hide">
         <h2>All done!</h2>
-        <p>Your final score is <span id="final-score"></span>.</p>
+        <p>Your final score is <span id="finalScore"></span>.</p>
         <p>
           Enter initials: <input type="text" id="initials" max="3" />
           <button id="submit">Submit</button>
@@ -41,8 +48,28 @@
 
       <div id="feedback" class="feedback hide"></div>
     </div>
-
-    <script src="./assets/js/questions.js"></script>
-    <script src="./assets/js/logic.js"></script>
+  </main>
+    <footer>
+      <div class="footerP">
+        made with hours of dabbling in <i class="fa-brands fa-square-js"></i> and with many <i class="fa fa-coffee" aria-hidden="true"></i> of tea!
+      </div>
+      <div class="footerTags">
+        <i class="fa fa-leaf" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp; #HaveTimeDrinkTea &nbsp;&nbsp;&nbsp; <i class="fa fa-heart" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp; #Kindfulness &nbsp;&nbsp;&nbsp; <i class="fa fa-coffee aria-hidden="true"></i> &nbsp;&nbsp;&nbsp; #TeahouseStirrings
+        </div>
+        <nav>
+          <a href="mailto:havetimedrinktea@gmail.com" alt="Click this icon to email Pei Wang" title="email Pei Wang"> <i class="fa fa-envelope-open" aria-hidden="true"></i></a>
+          &nbsp;&nbsp;&nbsp; <a href="https://www.github.com/havetimedrinktea/" alt="Click this icon to visit Pei Wang's Github page." title="Visit Pei Wang's GitHub page" target="_blank"> <i class="fab fa-github" aria-hidden="true"></i></a>
+          &nbsp;&nbsp;&nbsp; <a href="https://www.linkedin.com/in/teanamu" alt="Click this icon to visit Pei Wang's LinkedIn profile." target="_blank"> <i class="fab fa-linkedin" aria-hidden="true"></i></a>
+          &nbsp;&nbsp;&nbsp; <a href="https://www.facebook.com/havetimedrinktea/" alt="Click this icon to visit Pei Wang's Facebook feed." title="Pei's facebook page" target="_blank"> <i class="fab fa-facebook" aria-hidden="true"></i></a>
+        </nav>
+        <div class="footerCopyright">
+          <br><br><strong><i class="fa fa-copyright" aria-hidden="true"></i> 2023 PEI WANG</strong>
+        </div>
+      </div>
+      </p>
+      
+    </footer>
+    <script src="./assets/scripts/questions.js"></script>
+    <script src="./assets/scripts/logic.js"></script>
   </body>
 </html>
