@@ -2,7 +2,7 @@
 0. CSS Variables of fav colours
 ============================= */
 :root {
-    --fontvintage: #e0eae4;
+    --fontVintage: #e0eae4;
     --colorWhite: #fff;
     --colorElectricBlue: #0047ab;
     --colorElectricBlue90: rgba(0, 71, 171, 0.9);
@@ -21,6 +21,7 @@
     --colorGreen: rgba(84, 132, 52, 1);
     --colorGreen50: rgba(84, 132, 52, 0.5);
     --colorGreen70: rgba(84, 132, 52, 0.7);
+    --colorGreenFern: rgb(51, 125, 58);
     --colorTealDark: rgba(58, 128, 152, 1);
     --colorTealDark50: rgba(58, 128, 152, 0.5);
     --colorTealDarker: rgb(11, 70, 82);
@@ -42,9 +43,9 @@
     --colorCyanDark50: rgba(20, 70, 86, 0.5);
     --colorPurple: #611bbc;
     --colorPurpleDark: #5318a0;
-    --bgcolor:#607d8b;
-    --bgcolordark: #313138;
-    --bgcolorlight: #edc9c9;
+    --bgColor:#607d8b;
+    --bgColorDark: #313138;
+    --bgColorLight: #edc9c9;
     --colorBrownDarker: #432a11;
     --colorYellowLight: #f4f491;
     --colorGreyLight: #b9b6b6;
