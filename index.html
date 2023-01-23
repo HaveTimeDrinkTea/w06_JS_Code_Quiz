@@ -19,7 +19,7 @@
     <main>
     <div id="highScores" class="scores"><a href="highscores.html">View Highscores</a></div>
 
-    <div class="timer">Time: <span id="timeCountDown">0</span></div>
+    <div class="timer">Time<span id="timeCountDown">: 0s</span></div>
 
     <div class="wrapper">
       <div id="startScreen" class="start">
@@ -33,6 +33,7 @@
       </div>
 
       <div id="questionsDiv" class="hide">
+        <h1><i class="fa-brands fa-square-js"></i> <br> Coding Quiz</h1>
         <h2 id="questionTitle">question here</h2>
         <div id="questionChoicesDiv" class="choicesDiv"></div>
         <div id="answerMsgDiv"></div>
@@ -43,7 +44,6 @@
         <p class="msg">
           <span id="userScoreMsg"></span>
         </p>        
-        <p>Your final score is <span id="finalScore"></span>.</p>
         <p>
           Enter initials: <input type="text" id="initials" max="3" />
           <button id="submit">Submit</button>

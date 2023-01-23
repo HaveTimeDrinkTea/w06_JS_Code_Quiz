@@ -1,7 +1,7 @@
 // Get HTML elements
 var highScoresDivElQ = document.querySelector("#highScores");
-var timerDivEl = document.getElementById("#timer");
-var timeCountDownSpanEl= document.getElementById("#timeCountDown");
+var timerDivElQ = document.querySelector("#timer");
+var timeCountDownSpanElQ= document.querySelector("#timeCountDown");
 
 var startScreenDivElQ = document.querySelector("#startScreen");
 var startButtonElQ = document.querySelector("#startButton");
@@ -21,34 +21,73 @@ var finalScoreSpanEl = document.getElementById("#finalScore")
 
 var feedbackDivEl = document.getElementById("#feedback");
 
-//- initialise
+//- initialize
+var quizActive = true;
+var numQuestionReq = 3;
 
 function init() {
-
+    quizActive = true;
     userScoreMsg = "";
 };
 
+// Set timer
+
+var timer;
+var timerCount;
+
+function startTimer() {
+    // Sets timer
+    timer = setInterval(function() {
+        timerCount--;
+        console.log("timerCount",timerCount)
+        timeCountDownSpanElQ.textContent = ": " + timerCount + "s left";
+        if (timerCount >= 0) {
+        // Tests if win condition is met
+            if (!(quizActive) && timerCount > 0) {
+                // Clears interval and stops timer
+                clearInterval(timer);
+                timeCountDownSpanElQ.textContent = ": " + timerCount + "s left";
+
+            };
+        }
+        // Tests if time has run out
+        if (timerCount === 0) {
+            // Clears interval
+            clearInterval(timer);
+            timeCountDownSpanElQ.textContent = " is up!";
+            quizActive = false;
+            endQuiz();
+        };
+    }, 1000);
+}
 
 
 // Start or restart the Quiz
 
 startButtonElQ.addEventListener("click", function(event) {
+    quizActive = true;
+    timerCount = 5 * numQuestionReq; // * 15s per question
     renderQuestion();
+    startTimer();
 }
 );
 
 restartButtonElQ.addEventListener("click", function(event) {
+    quizActive = true;
+    timerCount = 5 * numQuestionReq; // * 15s per  question
     renderQuestion();
+    startTimer();
 }
 );
 
+
 // PW rendering the questions
 
-var numQuestionReq = 3;
+
 var numQuestionMax = questionsArray.length;
 var numQuestionCount = 0;
 var chosenQuestion = [];
-var quizActive = true;
+
 
 
 //- create a new array to hold all the questions first and then once the question is picked by getQuizQuestion() it will be removed from this array szo that repeated questions will not be shown
@@ -132,14 +171,18 @@ questionChoicesDivElQ.addEventListener("click", function(event) {
 };  
 
 var userScore = 0;
+
 function checkAnswer() {
     console.log("checkAns== userAnswer is", userAnswer,"vs correctAnswer is", correctAnswer);
     if ( (userAnswer === correctAnswer)) {
+        answerMsgDivElQ.innerHTML = "<i class='fa-solid fa-face-smile-halo'></i> Correct!!!!! 🙆🏻‍♂️";
         console.log("correct!!!!! 🙆🏻‍♂️");
         userScore ++;
         console.log("userScore:", userScore);
 } else {
-    console.log("wrong!!!!! 🙅🏻‍♂️");
+    answerMsgDivElQ.innerHTML = "<i class='fa-regular fa-face-woozy'></i> uh oh! Wrong answer!!!!! 🙅🏻‍♂️";
+    timerCount = timerCount -2; // time reduced by 2s if answer is wrong
+    console.log("🙅🏻‍♂️ uh oh! Wrong answer!!!!! 🙅🏻‍♂️");
     console.log("userScore:", userScore);
 };
 }
