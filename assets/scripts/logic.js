@@ -1,7 +1,8 @@
 // Get HTML elements
 var highScoresDivElQ = document.querySelector("#highScores");
-var timerDivEl = document.getElementById("#timer");
-var timeCountDownSpanEl= document.getElementById("#timeCountDown");
+var timerDivElQ = document.querySelector("#timer");
+var timeCountDownSpanElQ= document.querySelector("#timeCountDown");
+var timerPenaltyMsgSpanElQ= document.querySelector("#penaltyMsg");
 
 var startScreenDivElQ = document.querySelector("#startScreen");
 var startButtonElQ = document.querySelector("#startButton");
@@ -16,43 +17,102 @@ var questionChoicesDivElQ = document.querySelector("#questionChoicesDiv");
 var answerMsgDivElQ = document.querySelector("#answerMsgDiv");
 // var questionChoicesDivEl = document.getElementById("#questionChoicesDiv");
 
-var endScreenDivEl = document.getElementById("#endScreen");
-var finalScoreSpanEl = document.getElementById("#finalScore")
-
+var initialsInputElQ = document.querySelector("#initials");
+var userSubmitBtnElQ = document.querySelector("#submitUser");
 var feedbackDivEl = document.getElementById("#feedback");
 
-//- initialise
+//- initialize
+var quizActive = true;
+var numQuestionReq = 3;
 
 function init() {
-
+    quizActive = true;
     userScoreMsg = "";
 };
 
+// Set timer
+
+var timer;
+var timerCount;
+
+
+// set quiz related variables
+var numQuestionMax = questionsArray.length;
+var numQuestionCount = 0;
+var chosenQuestion = [];
+var questionsToChooseArray = questionsArray;
+
+// Scores and penalty
+var userScoreCurr = 0;
+
+    //- number of seconds to deduct if wrong answer given
+var penaltyCount = 0;
+var secondsDeducted = 0;
+
+var wrongAnsTimeDeduct = 2; 
+// Array to hold user stats in the local storage
+var userStatsArray;
+
+function startTimer() {
+    // Sets timer
+    timer = setInterval(function() {
+        timerCount--;
+        console.log("timerCount",timerCount)
+        timeCountDownSpanElQ.textContent = ": " + timerCount + "s left";
+        if (timerCount >= 0) {
+        // Tests if win condition is met
+            if (!(quizActive) && timerCount > 0) {
+                // Clears interval and stops timer
+                clearInterval(timer);
+                timeCountDownSpanElQ.textContent = ": " + timerCount + "s left";
+
+            };
+        }
+        // Tests if time has run out
+        if (timerCount === 0) {
+            // Clears interval
+            clearInterval(timer);
+            timeCountDownSpanElQ.textContent = " is up!";
+            quizActive = false;
+            endQuiz();
+        };
+    }, 1000);
+}
+
+function initQuiz() {
+    quizActive = true;
+    questionsToChooseArray = questionsArray;
+    numQuestionCount = 0;
+    chosenQuestion = [];
+    userScoreCurr = 0;
+    timerCount = 5 * numQuestionReq;
+    userAnswer = "";
+    correctAnswer = "";
+    userScoreMsg = ""; // * 15s per question
+}
 
 
 // Start or restart the Quiz
 
 startButtonElQ.addEventListener("click", function(event) {
+    initQuiz()
     renderQuestion();
+    startTimer();
 }
 );
 
 restartButtonElQ.addEventListener("click", function(event) {
+    initQuiz();
     renderQuestion();
+    startTimer();
 }
 );
 
+
 // PW rendering the questions
 
-var numQuestionReq = 3;
-var numQuestionMax = questionsArray.length;
-var numQuestionCount = 0;
-var chosenQuestion = [];
-var quizActive = true;
-
-
 //- create a new array to hold all the questions first and then once the question is picked by getQuizQuestion() it will be removed from this array szo that repeated questions will not be shown
-var questionsToChooseArray = questionsArray;
+
 
 function getQuizQuestion() {
 
@@ -86,6 +146,9 @@ function renderQuestion() {
     // make the relevant div to be visible or hidden
     highScoresDivElQ.setAttribute("class","hide");
     startScreenDivElQ.setAttribute("class","hide");
+    timerPenaltyMsgSpanElQ.setAttribute("class","hide");
+    endScreenDivElQ.setAttribute("class","hide");
+
     questionsDivElQ.setAttribute("class","visible");
     
     answerMsgDivElQ.innerHTML = "";
@@ -131,16 +194,26 @@ questionChoicesDivElQ.addEventListener("click", function(event) {
 //     questionsDivElQ.setAttribute("class","hide");
 };  
 
-var userScore = 0;
+
+
 function checkAnswer() {
     console.log("checkAns== userAnswer is", userAnswer,"vs correctAnswer is", correctAnswer);
     if ( (userAnswer === correctAnswer)) {
+        answerMsgDivElQ.innerHTML = "<i class='fa-solid fa-face-smile-halo'></i> Correct!!!!! 🙆🏻‍♂️";
         console.log("correct!!!!! 🙆🏻‍♂️");
-        userScore ++;
-        console.log("userScore:", userScore);
+        userScoreCurr ++;
+        console.log("userScore:", userScoreCurr);
 } else {
-    console.log("wrong!!!!! 🙅🏻‍♂️");
-    console.log("userScore:", userScore);
+    answerMsgDivElQ.innerHTML = "<i class='fa-regular fa-face-woozy'></i> uh oh! Wrong answer!!!!! 🙅🏻‍♂️";
+    timerCount = timerCount -2; // time reduced by 2s if answer is wrong
+    penaltyCount ++;
+    secondsDeducted = penaltyCount * wrongAnsTimeDeduct;
+
+    timerPenaltyMsgSpanElQ.setAttribute("class","visible");
+    timerPenaltyMsgSpanElQ.innerHTML = "Penalty: " + penaltyCount + "<br>Total Seconds Deducted: " + secondsDeducted;
+
+    console.log("🙅🏻‍♂️ uh oh! Wrong answer!!!!! 🙅🏻‍♂️");
+    console.log("userScore:", userScoreCurr);
 };
 }
 
@@ -152,31 +225,105 @@ function endQuiz() {
         console.log("quizActive", quizActive);
         highScoresDivElQ.setAttribute("class","scores");
         endScreenDivElQ.setAttribute("class","visible");
+
         //- set user score messages
-        console.log("userScore:",userScore);
+        console.log("userScore:",userScoreCurr);
         console.log("numQuestionReq:",numQuestionReq);
 
-        if (userScore === numQuestionReq) {
-            userScoreMsgSpanElQ.innerHTML = "Very Well done! You have a perfect score of " + userScore + " out of " + numQuestionReq +"!";
-        } else if ((userScore > 0) && (userScore < numQuestionReq)) {
-            userScoreMsgSpanElQ.innerHTML = "Close but no cigar! Your score is " + userScore + ". Aim for perfect score next time! You can do it!";
+        if (userScoreCurr === numQuestionReq) {
+            userScoreMsgSpanElQ.innerHTML = "<i class='fa-solid fa-trophy-star'></i>Very Well done! You have a perfect score of " + userScoreCurr + " out of " + numQuestionReq +"!";
+        } else if ((userScoreCurr > 0) && (userScoreCurr < numQuestionReq)) {
+            userScoreMsgSpanElQ.innerHTML = "<i class='fa-solid fa-face-unamused'></i> Close but no cigar! Your score is " + userScoreCurr + ". <br> Aim for perfect score next time! <br> <i class='fa-solid fa-person-digging'></i> You can do it!";
         } else {
-            userScoreMsgSpanElQ.innerHTML = "Oh dear! Your score is " + userScore + ". Please try harder! You can make it!";
+            userScoreMsgSpanElQ.innerHTML = "<i class='fa-solid fa-face-grimace'></i> Oh dear! Your score is " + userScoreCurr + ". <br> Please try harder! <i class='fa-solid fa-dumbbell'></i> You can make it!";
         };
-
         questionsDivElQ.setAttribute("class","hide");
         return;
 };
 
 
 
-// function checkAnswer(userAnswer, correctAnswer) {
-//     if (userAnswer === correctAnswer) {
-//         console.log("right!");
-//         answerMsgDivElQ.innerHTML = "Correct! 🙆🏻‍♂️";
-//     } else 
-//     {
-//         console.log("wrong!");
-//         answerMsgDivElQ.innerHTML = "Wrong! 🙅🏻‍♂️";
-//     };
-// }
+    userSubmitBtnElQ.addEventListener("click", function(event) {
+        console.log("im' here!!!! after clicking submit");
+        userInitials = initialsInputElQ.value;
+        console.log("userInitials:",userInitials)
+        prepHighScore();
+        return;
+        }
+    )
+;
+
+
+
+
+// updating local storage
+
+const maxHighScoresUsers = 3;
+var userStatsStored;
+var userStats;
+var prevMinScore;
+var userInitials; 
+
+function sortUserStats() {
+    userStatsStored.sort((s1, s2) => (s1.userScore < s2.userScore) ? 1 : (s1.userScore > s2.userScore) ? -1 :0);
+}
+
+
+function prepHighScore() {
+
+    userStatsStored = JSON.parse(localStorage.getItem(userStats));
+
+    if (userStatsStored === null) {
+        userStatsStored = [];
+        prevMinScore = 0;
+    } else {
+        sortUserStats();
+        prevMinScore = userStatsStored[userStatsStored.length - 1].userScore;
+    };
+    console.log("here!:", userStatsStored)
+    console.log("prevMinScore:", prevMinScore);
+// Updates win count on screen and sets win count to client storage 
+
+    if (userStatsStored.length < maxHighScoresUsers) {
+        // just insert the current user
+        // sort the array and then put into local storage
+        // respond with a message
+
+        userStatsStored.push(
+            {
+            userInitials: userInitials,
+            userScore: userScoreCurr,
+            currentScore : true,
+            }
+        );
+
+        sortUserStats();
+        localStorage.setItem(userStats, JSON.stringify(userStatsStored));
+        console.log(userStatsStored);
+        console.log("you are in the league table!");
+    
+    } else {
+        // check if the score is good enough to be inserted into the high scores
+        // respond with a message
+        if (userScoreCurr > prevMinScore) {
+            //removed last element with the lowest score
+            userStatsStored.pop(); 
+            // insert latest score
+            userStatsStored.push(
+                {
+                userInitials: userInitials,
+                userScore: userScoreCurr,
+                currentScore : true,
+                }
+            );
+
+            sortUserStats();
+            localStorage.setItem(userStats, JSON.stringify(userStatsStored));
+            console.log(userStatsStored);
+            console.log("you are in the league table!");
+        } else {
+            // sorry not good enough to be in high scores league table
+            console.log("sorry not good enough to enter the league table");
+        };
+    };
+}

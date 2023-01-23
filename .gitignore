@@ -1,6 +1,7 @@
 # Ignore .DS_Store and .vscode added by Mac OS
 **/.DS_Store
 **/.vscode
+test.js
 
 # Logs
 logs
