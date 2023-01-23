@@ -99,6 +99,25 @@ footer {
   display: none;
 }
 
+
+/* global text styling */
+
+h1 {
+  font-size: 3rem;
+  text-align: center;
+}
+
+h2 {
+  font-size: 2.8rem;
+  text-align: center;
+}
+
+.msg {
+  font-size: 1.5rem;
+  color: var(--colorElectricBlue);
+}
+
+
 /* buttons */
 button {
   display: inline-block;

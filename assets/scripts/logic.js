@@ -6,6 +6,10 @@ var timeCountDownSpanEl= document.getElementById("#timeCountDown");
 var startScreenDivElQ = document.querySelector("#startScreen");
 var startButtonElQ = document.querySelector("#startButton");
 
+var endScreenDivElQ = document.querySelector("#endScreen");
+var restartButtonElQ = document.querySelector("#restartButton");
+var userScoreMsgSpanElQ = document.querySelector("#userScoreMsg");
+
 var questionsDivElQ = document.querySelector("#questionsDiv");
 var questionTitleElQ = document.querySelector("#questionTitle");
 var questionChoicesDivElQ = document.querySelector("#questionChoicesDiv");
@@ -17,15 +21,26 @@ var finalScoreSpanEl = document.getElementById("#finalScore")
 
 var feedbackDivEl = document.getElementById("#feedback");
 
+//- initialise
 
-// Start the Quiz
+function init() {
+
+    userScoreMsg = "";
+};
+
+
+
+// Start or restart the Quiz
 
 startButtonElQ.addEventListener("click", function(event) {
     renderQuestion();
 }
 );
 
-
+restartButtonElQ.addEventListener("click", function(event) {
+    renderQuestion();
+}
+);
 
 // PW rendering the questions
 
@@ -60,6 +75,7 @@ function getQuizQuestion() {
 
 var userAnswer;
 var correctAnswer;
+var userScoreMsg;
 
 function renderQuestion() {
 
@@ -89,13 +105,14 @@ function renderQuestion() {
         + chosenQuestion[0].option.d +"</li></ol>";
 
         console.log("numQuestionCount:",numQuestionCount);
+        console.log("quizActive", quizActive);
     } else {
-        //- end the quiz
-        console.log("finish!!!!");
-        quizActive = false;
-        return;
+        endQuiz();
     };
 };
+
+
+
 //- end function renderQuestion
 if (quizActive) {
 questionChoicesDivElQ.addEventListener("click", function(event) {
@@ -108,17 +125,48 @@ questionChoicesDivElQ.addEventListener("click", function(event) {
         return;
     }
 })
+// } else {
+//     highScoresDivElQ.setAttribute("class","scores");
+//     startScreenDivElQ.setAttribute("class","start");
+//     questionsDivElQ.setAttribute("class","hide");
 };  
 
-function checkAnswer(userAnswer, correctAnswer) {
+var userScore = 0;
+function checkAnswer() {
+    console.log("checkAns== userAnswer is", userAnswer,"vs correctAnswer is", correctAnswer);
     if ( (userAnswer === correctAnswer)) {
         console.log("correct!!!!! 🙆🏻‍♂️");
+        userScore ++;
+        console.log("userScore:", userScore);
 } else {
     console.log("wrong!!!!! 🙅🏻‍♂️");
+    console.log("userScore:", userScore);
 };
 }
 
+function endQuiz() {
+        // - numQuestionCount > numQuestionReq
+        //- end the quiz
+        console.log("finish!!!!");
+        quizActive = false;
+        console.log("quizActive", quizActive);
+        highScoresDivElQ.setAttribute("class","scores");
+        endScreenDivElQ.setAttribute("class","visible");
+        //- set user score messages
+        console.log("userScore:",userScore);
+        console.log("numQuestionReq:",numQuestionReq);
 
+        if (userScore === numQuestionReq) {
+            userScoreMsgSpanElQ.innerHTML = "Very Well done! You have a perfect score of " + userScore + " out of " + numQuestionReq +"!";
+        } else if ((userScore > 0) && (userScore < numQuestionReq)) {
+            userScoreMsgSpanElQ.innerHTML = "Close but no cigar! Your score is " + userScore + ". Aim for perfect score next time! You can do it!";
+        } else {
+            userScoreMsgSpanElQ.innerHTML = "Oh dear! Your score is " + userScore + ". Please try harder! You can make it!";
+        };
+
+        questionsDivElQ.setAttribute("class","hide");
+        return;
+};
 
 
 
