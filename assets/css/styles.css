@@ -117,6 +117,12 @@ button:hover {
   background-color: #8570a5;
 }
 
+/* Question and answers area */
+
+#questionTitle {
+  font-size: 1.8rem;
+}
+
 .choices button {
   display: block;
 }
@@ -129,15 +135,22 @@ ol {
   padding-left: 0px;
   max-height: 400px;
   overflow: auto;
+  font-size: 1.5rem; 
+  width: 100%;
 }
 
 li {
-  padding: 5px;
+  padding: 20px;
   list-style: decimal inside none;
 }
 
 li:nth-child(odd) {
   background-color: #f3edfc;
+}
+
+#answerMsgDiv {
+  font-size: 2rem;
+  text-align: center;
 }
 
 .wrapper {

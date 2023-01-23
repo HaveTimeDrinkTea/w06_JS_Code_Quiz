@@ -1,56 +1,134 @@
 // Get HTML elements
-var scoresDivEl = document.getElementById("#scores");
-var scoresDivEl = document.getElementById("#");
+var highScoresDivElQ = document.querySelector("#highScores");
 var timerDivEl = document.getElementById("#timer");
 var timeCountDownSpanEl= document.getElementById("#timeCountDown");
 
 var startScreenDivElQ = document.querySelector("#startScreen");
-var startButtonEl = document.getElementById("#startButton");
+var startButtonElQ = document.querySelector("#startButton");
 
 var questionsDivElQ = document.querySelector("#questionsDiv");
 var questionTitleElQ = document.querySelector("#questionTitle");
-var questionChoicesEl = document.getElementById("#questionChoicesDiv");
+var questionChoicesDivElQ = document.querySelector("#questionChoicesDiv");
+var answerMsgDivElQ = document.querySelector("#answerMsgDiv");
+// var questionChoicesDivEl = document.getElementById("#questionChoicesDiv");
 
 var endScreenDivEl = document.getElementById("#endScreen");
 var finalScoreSpanEl = document.getElementById("#finalScore")
 
 var feedbackDivEl = document.getElementById("#feedback");
 
+
+// Start the Quiz
+
+startButtonElQ.addEventListener("click", function(event) {
+    renderQuestion();
+}
+);
+
+
+
 // PW rendering the questions
 
-var numQuestion = 3;
-var chosenQuestionsArray = [];
+var numQuestionReq = 3;
+var numQuestionMax = questionsArray.length;
+var numQuestionCount = 0;
+var chosenQuestion = [];
+var quizActive = true;
 
-function createQuizArray(numQuestion, questionsArray) {
-    //- create new array to hold questions, once a question is selected randomly it will be removed from the array. This is to ensure the same question is not chosen twice.
 
-    let questionsToChooseArray = questionsArray;
-    if (numQuestion < 3) { numQuestion = 3;};
+//- create a new array to hold all the questions first and then once the question is picked by getQuizQuestion() it will be removed from this array szo that repeated questions will not be shown
+var questionsToChooseArray = questionsArray;
 
-    for (var i = 0; i < numQuestion; i++) {
+function getQuizQuestion() {
 
-        let randomIndex = Math.floor(Math.random() * questionsToChooseArray.length);
-        chosenQuestionsArray.push(questionsToChooseArray[randomIndex]);
+    let randomIndex = Math.floor(Math.random() * questionsToChooseArray.length);
+
+    console.log("randomIndex", randomIndex);
+
+    chosenQuestion = [];
+    chosenQuestion.push(questionsToChooseArray[randomIndex]);
+
+    console.log("chosenQuestion:",chosenQuestion);   
+    if (questionsToChooseArray.length > 0) {
+        questionsToChooseArray.splice(randomIndex,1);
     };
-    
-    if (questionsToChooseArray > 0) {
-        questionsToChooseArray.slice(i,1);
-    };
+    console.log("questionsToChooseArray:",questionsToChooseArray);
+
+    numQuestionCount++;
 };
+//- end of function questionsToChooseArray()
 
+var userAnswer;
+var correctAnswer;
 
-function renderQuestions() {
+function renderQuestion() {
+
+    if (numQuestionCount < numQuestionReq) {
     // Get the Question Data set: 
-    createQuizArray(numQuestion, questionsArray);
-    console.log(chosenQuestionsArray);
+    getQuizQuestion();
 
+    // make the relevant div to be visible or hidden
+    highScoresDivElQ.setAttribute("class","hide");
     startScreenDivElQ.setAttribute("class","hide");
     questionsDivElQ.setAttribute("class","visible");
     
+    answerMsgDivElQ.innerHTML = "";
 
-    for (i = 0; i < chosenQuestionsArray.length; i++ ) {
-        questionTitleElQ.textContent = chosenQuestionsArray[i];
+    userAnswer = "";
+    correctAnswer = "";
+    console.log("Question:", numQuestionCount);
+
+    questionTitleElQ.innerHTML = "Question " + numQuestionCount + ":<br><br>" + chosenQuestion[0].question;
+    correctAnswer = chosenQuestion[0].answer;
+    console.log("Correct Answer:", correctAnswer);
+
+    questionChoicesDivElQ.innerHTML = "<ol><li id='a'>"
+        + chosenQuestion[0].option.a + "</li><li id='b'>" 
+        + chosenQuestion[0].option.b + "</li><li id='c'>" 
+        + chosenQuestion[0].option.c + "</li><li id='d'>" 
+        + chosenQuestion[0].option.d +"</li></ol>";
+
+        console.log("numQuestionCount:",numQuestionCount);
+    } else {
+        //- end the quiz
+        console.log("finish!!!!");
+        quizActive = false;
+        return;
     };
 };
+//- end function renderQuestion
+if (quizActive) {
+questionChoicesDivElQ.addEventListener("click", function(event) {
+    if(event.target && event.target.nodeName === "LI") {
+        console.log("I'm here!");
+        userAnswer = event.target.id;
+        console.log("user answer:", userAnswer);
+        checkAnswer();
+        renderQuestion();
+        return;
+    }
+})
+};  
 
-renderQuestions();
+function checkAnswer(userAnswer, correctAnswer) {
+    if ( (userAnswer === correctAnswer)) {
+        console.log("correct!!!!! 🙆🏻‍♂️");
+} else {
+    console.log("wrong!!!!! 🙅🏻‍♂️");
+};
+}
+
+
+
+
+
+// function checkAnswer(userAnswer, correctAnswer) {
+//     if (userAnswer === correctAnswer) {
+//         console.log("right!");
+//         answerMsgDivElQ.innerHTML = "Correct! 🙆🏻‍♂️";
+//     } else 
+//     {
+//         console.log("wrong!");
+//         answerMsgDivElQ.innerHTML = "Wrong! 🙅🏻‍♂️";
+//     };
+// }
