@@ -16,34 +16,39 @@
   </head>
 
   <body>
+    <header>
+      <h1><i class="fa-brands fa-square-js"></i> <br> Coding Quiz</h1>
+      <div id="highScores" class="scores">
+        <a href="highscores.html"><i class="fa-solid fa-star"></i> High Scores <i class="fa-solid fa-star"></i> </a>
+      </div>
+    </header>
+
     <main>
-    <div id="highScores" class="scores"><a href="highscores.html">View Highscores</a></div>
-
-    <div class="timer">
-      Time<span id="timeCountDown">: 0s</span>
-      <span id="penaltyMsg" class="hide"></span>
-    </div>
-
     <div class="wrapper">
+      <div id="timer" class="hide">
+        Time<span id="timeCountDown">: 0s</span>
+        <span id="penaltyMsg" class="hide"></span>
+
+      </div>
       <div id="startScreen" class="start">
-        <h1><i class="fa-brands fa-square-js"></i> <br> Coding Quiz</h1>
         <p>
-          Try to answer the following code-related questions within the time
-          limit. Keep in mind that incorrect answers will penalize your
-          score/time by ten seconds!
+          Try to answer the following <i class="fa-brands fa-square-js"></i> questions within the time
+          limit. 
+          <br> You have 5 seconds to answer each multiple choice question. 
+          <br> Keep in mind that incorrect answers will penalize your
+          time by 3 seconds!
         </p>
         <button id="startButton">Start Quiz</button>
       </div>
 
       <div id="questionsDiv" class="hide">
-        <h1><i class="fa-brands fa-square-js"></i> <br> Coding Quiz</h1>
-        <h2 id="questionTitle">question here</h2>
+        <h2 id="questionTitle"></h2>
         <div id="questionChoicesDiv" class="choicesDiv"></div>
         <div id="answerMsgDiv"></div>
       </div>
 
       <div id="endScreen" class="hide">
-        <h2><i class="fa-brands fa-square-js"></i> <br> Coding Quiz Completed</h2>
+        <h2><i class="fa-brands fa-square-js"></i> Quiz Completed</h2>
         <p class="msg">
           <span id="userScoreMsg"></span>
         </p>        

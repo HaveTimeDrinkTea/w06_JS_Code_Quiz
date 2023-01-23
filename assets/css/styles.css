@@ -1,29 +1,39 @@
 body {
   font-family: Arial;
   font-size: 67.5%;
+  color: var(--colorWhite);
+  background-color: var(--colorTealDarker);
 }
 
 a {
-  color: #563d7c;
+  color: var(--fontVintage);
   font-size: 1.5rem;
   text-decoration: none;
   transition: color 0.1s;
 }
 
 a:hover {
-  color: #8570a5;
+  color: var(--colorLemon);
+  text-shadow: 2px 2px var(--colorCharcoal);
+}
+
+p {
+  color: var(--colorWhite);
+  font-size: 1.2rem;
+  line-height: 2rem;
 }
 
 /* header and footer */
 
 
 header,
-footer {
+footer,
+.wrapper {
   text-align: center;
-  padding: 20px;
+  padding: 5px;
   margin: 0 auto;
-  max-width: 800px;
-  border: solid 0.5rem var(--colorWhite);
+  max-width: 80vw;
+  border: solid 0.3rem var(--colorWhite);
   box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 8px 0px;
   border-radius: 5px;
   color: var(--colorWhite);
@@ -31,14 +41,14 @@ footer {
 
 header {
   background-color: var(--colorElectricBlue);
-  margin-bottom: 40px; 
+  margin-bottom: 10px;
 }
 
 footer {
   margin-top: 40px; 
   margin-bottom: 40px; 
   font-size: 1.5rem;
-  background-color: var(--colorPinkDark);
+  background-color: var(--colorBrownMonkey);
 }
 
 header::after,
@@ -80,12 +90,12 @@ footer a {
   text-transform: uppercase;
   padding-right: 2px;
   border: 0;
-  color: var(--fontvintage);
+  color: var(--fontVintage);
 }
 
 footer a,
 footer a:focus {
-  color: var(--fontvintage);
+  color: var(--fontVintage);
 }
 
 footer a:hover,
@@ -95,26 +105,23 @@ footer a.active:hover {
   text-shadow: 1px 1px var(--colorWheat);
 }
 
-footer {
-  display: none;
-}
+
 
 
 /* global text styling */
 
 h1 {
-  font-size: 3rem;
+  font-size: 2.5rem;
   text-align: center;
 }
 
 h2 {
-  font-size: 2.8rem;
+  font-size: 2rem;
   text-align: center;
 }
 
 .msg {
-  font-size: 1.8rem;
-  color: var(--colorElectricBlue);
+  font-size: 1.7rem;
   text-align: center;
   line-height: 3rem;
 }
@@ -127,20 +134,34 @@ h2 {
 /* buttons */
 button {
   display: inline-block;
-  margin: 5px;
-  cursor: pointer;
+  padding: 10px;
+  margin: 10px;
   font-size: 2rem;
-  background-color: #563d7c;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: auto;
+  color: var(--colorWhite);
+  background-color: var(--colorGreen);
+  border: solid 1px var(--colorWhite);
   border-radius: 5px;
-  padding: 2px 10px;
-  color: white;
-  border: 0;
-  transition: background-color 0.1s;
+  box-shadow: 5px 5px var(--colorCharcoal);
 }
 
-button:hover {
-  background-color: #8570a5;
+button:hover, 
+button:visited {
+  background-color: var(--colorRed);
+  box-shadow: 5px 5px var(--colorWheat);
+  color: var(--colorWhite);
 }
+
+button:active {
+  background-color: var(--colorRed);
+  box-shadow: 5px 5px var(--colorWheat);
+  transform: translateY(4px);
+  color: var(--fontVintage);
+}
+
 
 /* Question and answers area */
 
@@ -167,11 +188,15 @@ ol {
 li {
   padding: 20px;
   list-style: decimal inside none;
+  border: solid 0.2rem var(--colorWhite);
+  color: var(--colorWhite);
+  margin: 10px;
+  background-color: var(--colorTealMedium);
 }
 
-li:nth-child(odd) {
+/* li:nth-child(odd) {
   background-color: #f3edfc;
-}
+} */
 
 #answerMsgDiv {
   font-size: 2rem;
@@ -179,8 +204,48 @@ li:nth-child(odd) {
 }
 
 .wrapper {
-  margin: 100px auto 0 auto;
-  max-width: 600px;
+  margin: 30px auto 0 auto;
+  max-width: 80vw;
+  background-color: var(--colorPink);
+}
+
+
+
+.timer {
+  position: relative;
+  font-size: 1.5rem;
+  max-width: 90%;
+  color: var(--fontVintage);
+  padding: 1rem;
+  margin: 10px auto;
+  background-color: var(--colorGreenFern);
+  top: 0px;
+  left: 0px;
+  text-align: center;
+}
+
+#penaltyMsg {
+  font-size: 1rem;
+  font-style: italic;
+  float: right;
+}
+
+#questionsDiv {
+  position: relative;
+  font-size: 1.5rem;
+  max-width: 90%;
+  color: var(--colorWhite);
+  padding: 1rem;
+  margin: 10px auto;
+  background-color: var(--colorPink);
+  top: 0px;
+  left: 0px;
+  text-align: left;
+}
+
+#answerMsgDiv {
+  font-size: 1rem;
+  color: var(--colorRed);
 }
 
 .hide {
@@ -197,9 +262,9 @@ li:nth-child(odd) {
 }
 
 .scores {
-  position: absolute;
-  top: 10px;
-  left: 10px;
+  position: relative;
+  top: 0px;
+  left: 0px;
 }
 
 
@@ -216,17 +281,4 @@ li:nth-child(odd) {
   border-top: 2px solid #ccc;
 }
 
-.timer {
-  position: absolute;
-  font-size: 2rem;
-  color: var(--fontvintage);
-  background-color: var(--colorRed);
-  top: 10px;
-  right: 10px;
-  padding: 1rem;
-}
 
-#penaltyMsg {
-  font-size: 1rem;
-  font-style: italic;
-}

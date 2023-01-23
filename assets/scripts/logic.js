@@ -54,6 +54,7 @@ var wrongAnsTimeDeduct = 2;
 var userStatsArray;
 
 function startTimer() {
+    timerDivElQ.setAttribute("class", "timer");
     // Sets timer
     timer = setInterval(function() {
         timerCount--;
@@ -150,7 +151,7 @@ function renderQuestion() {
     endScreenDivElQ.setAttribute("class","hide");
 
     questionsDivElQ.setAttribute("class","visible");
-    
+    questionChoicesDivElQ.addEventListener("click", activeQuiz);
     answerMsgDivElQ.innerHTML = "";
 
     userAnswer = "";
@@ -177,8 +178,8 @@ function renderQuestion() {
 
 
 //- end function renderQuestion
-if (quizActive) {
-questionChoicesDivElQ.addEventListener("click", function(event) {
+
+function activeQuiz(event) {
     if(event.target && event.target.nodeName === "LI") {
         console.log("I'm here!");
         userAnswer = event.target.id;
@@ -187,12 +188,11 @@ questionChoicesDivElQ.addEventListener("click", function(event) {
         renderQuestion();
         return;
     }
-})
-// } else {
-//     highScoresDivElQ.setAttribute("class","scores");
-//     startScreenDivElQ.setAttribute("class","start");
-//     questionsDivElQ.setAttribute("class","hide");
-};  
+}
+
+
+
+
 
 
 
@@ -238,6 +238,7 @@ function endQuiz() {
             userScoreMsgSpanElQ.innerHTML = "<i class='fa-solid fa-face-grimace'></i> Oh dear! Your score is " + userScoreCurr + ". <br> Please try harder! <i class='fa-solid fa-dumbbell'></i> You can make it!";
         };
         questionsDivElQ.setAttribute("class","hide");
+        questionChoicesDivElQ.removeEventListener("click", activeQuiz);
         return;
 };
 
