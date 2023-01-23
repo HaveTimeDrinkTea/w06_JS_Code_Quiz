@@ -19,7 +19,10 @@
     <main>
     <div id="highScores" class="scores"><a href="highscores.html">View Highscores</a></div>
 
-    <div class="timer">Time<span id="timeCountDown">: 0s</span></div>
+    <div class="timer">
+      Time<span id="timeCountDown">: 0s</span>
+      <span id="penaltyMsg" class="hide"></span>
+    </div>
 
     <div class="wrapper">
       <div id="startScreen" class="start">
@@ -44,11 +47,13 @@
         <p class="msg">
           <span id="userScoreMsg"></span>
         </p>        
-        <p>
+        <p class="inputScore">
           Enter initials: <input type="text" id="initials" max="3" />
-          <button id="submit">Submit</button>
+          <button id="submitUser">Submit</button>
         </p>
-        <p> Do you want to take the quiz again?
+        <br><br>
+        <p class="inputScore"> Do you want to take the quiz again? 
+          <br> <span style="font-size:0.8rem; font-style: italic;">(without saving your current score)</span>
           <button id="restartButton">Restart Quiz</button>
         </p>
       </div>
