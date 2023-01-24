@@ -8,6 +8,9 @@ It requires us to use JScript objects, client-side storage, browser events to bu
 
 The JScript will produce the output dyanmically to the webpage pages as part of the starter code provided. I've tried to group repeatedly called Jscript codes into modular functions where possible.
 
+To make it easier to evaluate this application, I have deliberately set the quiz to take only 3 questions from a question bank of 20 and set each question and to allow a total of 18 seconds to answer them. The application is coded in such a way these parameters can be changed easily.
+
+
 
 
 
@@ -23,8 +26,10 @@ The JScript will produce the output dyanmically to the webpage pages as part of 
 
 ### Further Improvements
 
-* To allow users to input the number of questions to be included in a quiz and / or the amount of time allowed or each question. This can be implemented using FORM and event listeners in the homepage.
+* To allow users to input the number of questions to be included in a quiz and / or the amount of time allowed or each question. This can be implemented using FORM and event listeners in the homepage. 
 * To set up an even larger bank of questions or categories of questions.
+* Add a quit button to quit the quiz at any time.
+* Add a Spaced Repetition System learning mechanism to this quiz application. 
 
 
 
@@ -118,18 +123,17 @@ MIT License
 ## Features
 
 ### Main Features
-* A Styled homepage with dynamically displayed quiz section at the click of a button
-  * Each quiz has 3 questions and a total of 15 seconds to complete. 
+* A styled homepage with dynamically displayed quiz section at the click of a button
+  * Each quiz has 3 questions and a total of 18 seconds to complete. 
   * The quiz questions are selected from a quiz bank of 20 questions and each question will not be repeated in each quiz
   * Upon clicking an answer, the user is presented with the next question until there are no more questions or that the time has run out.
-  * When the user selects the wrong answer, the total time left will be reduced by 3 seconds. This penalty information will be shown when the quiz completes.
+  * When the user selects the wrong answer, the total time left will be reduced by 2 seconds. This penalty information will be shown when the quiz completes.
 * At the end of the quiz, the user is
   * presented with a custom message about their score
-  * given the option to submit their name and the current score for adding to the league table.
-    * the league table stores top 3 users and if the current score is not more than the lowest score held in the client side local storage, then the user is presented with the approprite message.
-    * if the score is higher than the lowest score held in the client side local storage, then it will be inserted into the league table with the previous low score being removed.
-    * if there are less than 3 scores in the league table, then the user's current score will be inserted into the league table.
-  * The user will also be given the option of restarting the quiz without storing their current score.
+  * given the option to submit their name and the current score for adding to the league table. The league table stores top 3 users held in the client side local storage area.
+    * If the current score is less than the lowest score in the client side local storage, then the user is presented with the appropriate message.
+    * If the score is higher than the lowest score held, then it will be inserted into the league table with the previous low score being removed.
+    * If there are less than 3 scores in the league table, then the user's current score will be inserted into the league table.
 * Users can view the high scores league table by clicking on the High Score link at the top of the home page  
 
 
