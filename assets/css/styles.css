@@ -46,8 +46,8 @@ header {
 
 footer {
   margin-top: 40px; 
-  margin-bottom: 40px; 
-  font-size: 1.5rem;
+  margin-bottom: 20px; 
+  font-size: 1rem;
   background-color: var(--colorBrownMonkey);
 }
 
@@ -63,28 +63,35 @@ footer nav,
 .footerP, 
 .footerTag, 
 .footerCopyright {
-  font-size: 1.5rem;
+  font-size: 1rem;
+}
+
+footer nav {
+  margin-bottom: 0px;
 }
 
 .footerP {
   font-style: italic;
-  padding-bottom: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .footerTags {
   font-weight: bold;
-  padding-bottom: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   color: var(--colorWheat);
 }
 
 .footerCopyright {
-  font-size: 1.2rem;
+  font-size: 1rem;
+  margin-top: 0px;
   font-style: italic;
 }
 
 
 footer a {
-  font-size: 2.5rem;
+  font-size: 1.8rem;
   font-family: 'Lato', 'Helvetica', 'Arial', 'sans-serif';
   letter-spacing: 0.5rem;
   text-transform: uppercase;
@@ -119,6 +126,7 @@ h2 {
   font-size: 2rem;
   text-align: center;
 }
+
 
 .msg {
   font-size: 1.7rem;
@@ -228,6 +236,7 @@ li {
   font-size: 1rem;
   font-style: italic;
   float: right;
+  text-align: right;
 }
 
 #questionsDiv {
@@ -256,6 +265,9 @@ li {
   display: block;
 }
 
+.visibleInline {
+  display: inline;
+}
 
 .start {
   text-align: center;
@@ -272,13 +284,21 @@ li {
   color: black;
 } ;
 
-.feedback {
-  font-style: italic;
-  font-size: 1.22rem;
-  margin-top: 20px;
-  padding-top: 10px;
-  color: gray;
-  border-top: 2px solid #ccc;
+#feedback {
+  color: var(--colorWhite);
 }
 
 
+#highScoreMsg {
+  font-style: italic;
+  font-size: 1rem;
+  margin-top: 20px;
+  padding: 10px;
+  color: var(--colorLemon);
+  background-color: var(--colorTealDarker);
+}
+
+
+#highScoreTitle {
+  padding: 5px;
+}

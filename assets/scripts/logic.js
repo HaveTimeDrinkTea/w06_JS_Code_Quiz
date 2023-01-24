@@ -15,11 +15,11 @@ var questionsDivElQ = document.querySelector("#questionsDiv");
 var questionTitleElQ = document.querySelector("#questionTitle");
 var questionChoicesDivElQ = document.querySelector("#questionChoicesDiv");
 var answerMsgDivElQ = document.querySelector("#answerMsgDiv");
-// var questionChoicesDivEl = document.getElementById("#questionChoicesDiv");
 
 var initialsInputElQ = document.querySelector("#initials");
 var userSubmitBtnElQ = document.querySelector("#submitUser");
-var feedbackDivEl = document.getElementById("#feedback");
+var feedbackDivElQ = document.querySelector("#feedback");
+var highScoreMsgSpanElQ = document.querySelector("#highScoreMsg");
 
 //- initialize
 var quizActive = true;
@@ -53,6 +53,23 @@ var wrongAnsTimeDeduct = 2;
 // Array to hold user stats in the local storage
 var userStatsArray;
 
+// initialization
+
+function initQuiz() {
+    quizActive = true;
+    questionsToChooseArray = questionsArray;
+    numQuestionCount = 0;
+    chosenQuestion = [];
+    userScoreCurr = 0;
+    timerCount = 5 * numQuestionReq; // * 15s per question
+    userAnswer = "";
+    correctAnswer = "";
+    userScoreMsg = ""; 
+}
+
+
+
+
 function startTimer() {
     timerDivElQ.setAttribute("class", "timer");
     // Sets timer
@@ -66,7 +83,6 @@ function startTimer() {
                 // Clears interval and stops timer
                 clearInterval(timer);
                 timeCountDownSpanElQ.textContent = ": " + timerCount + "s left";
-
             };
         }
         // Tests if time has run out
@@ -80,17 +96,6 @@ function startTimer() {
     }, 1000);
 }
 
-function initQuiz() {
-    quizActive = true;
-    questionsToChooseArray = questionsArray;
-    numQuestionCount = 0;
-    chosenQuestion = [];
-    userScoreCurr = 0;
-    timerCount = 5 * numQuestionReq;
-    userAnswer = "";
-    correctAnswer = "";
-    userScoreMsg = ""; // * 15s per question
-}
 
 
 // Start or restart the Quiz
@@ -112,7 +117,7 @@ restartButtonElQ.addEventListener("click", function(event) {
 
 // PW rendering the questions
 
-//- create a new array to hold all the questions first and then once the question is picked by getQuizQuestion() it will be removed from this array szo that repeated questions will not be shown
+//- create a new array to hold all the questions first and then once the question is picked by getQuizQuestion() it will be removed from this array so that repeated questions will not be shown
 
 
 function getQuizQuestion() {
@@ -149,6 +154,7 @@ function renderQuestion() {
     startScreenDivElQ.setAttribute("class","hide");
     timerPenaltyMsgSpanElQ.setAttribute("class","hide");
     endScreenDivElQ.setAttribute("class","hide");
+    feedbackDivElQ.setAttribute("class","hide");
 
     questionsDivElQ.setAttribute("class","visible");
     questionChoicesDivElQ.addEventListener("click", activeQuiz);
@@ -189,11 +195,6 @@ function activeQuiz(event) {
         return;
     }
 }
-
-
-
-
-
 
 
 function checkAnswer() {
@@ -257,9 +258,9 @@ function endQuiz() {
 
 
 
-// updating local storage
+// updating High Scores in local storage
 
-const maxHighScoresUsers = 3;
+const maxHighScoresUsers = 3; // number of user stats to be stored
 var userStatsStored;
 var userStats;
 var prevMinScore;
@@ -272,7 +273,7 @@ function sortUserStats() {
 
 function prepHighScore() {
 
-    userStatsStored = JSON.parse(localStorage.getItem(userStats));
+    userStatsStored = JSON.parse(localStorage.getItem("userStats"));
 
     if (userStatsStored === null) {
         userStatsStored = [];
@@ -299,9 +300,9 @@ function prepHighScore() {
         );
 
         sortUserStats();
-        localStorage.setItem(userStats, JSON.stringify(userStatsStored));
-        console.log(userStatsStored);
-        console.log("you are in the league table!");
+        localStorage.setItem("userStats", JSON.stringify(userStatsStored));
+        feedbackDivElQ.setAttribute("class","visible");
+        highScoreMsgSpanElQ.innerHTML = "You are in the league table!";
     
     } else {
         // check if the score is good enough to be inserted into the high scores
@@ -319,12 +320,19 @@ function prepHighScore() {
             );
 
             sortUserStats();
-            localStorage.setItem(userStats, JSON.stringify(userStatsStored));
-            console.log(userStatsStored);
-            console.log("you are in the league table!");
+            localStorage.setItem("userStats", JSON.stringify(userStatsStored));
+            feedbackDivElQ.setAttribute("class","visible");
+            highScoreMsgSpanElQ.innerHTML = "You are in the league table!";
         } else {
             // sorry not good enough to be in high scores league table
-            console.log("sorry not good enough to enter the league table");
+            feedbackDivElQ.setAttribute("class","visible");
+            highScoreMsgSpanElQ.innerHTML = "Sorry! Your score is not high enough to enter the league table.";
         };
     };
 }
+
+// console.log(questionsToChooseArray);
+
+
+initQuiz();
+

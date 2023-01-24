@@ -1,23 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-gb">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Highscores</title>
+    
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico" />
+    <script src="https://kit.fontawesome.com/72c3290151.js" crossorigin="anonymous"></script>
+    
+    <title>Coding Quiz High Scores</title>
 
     <link rel="stylesheet" href="./assets/css/styles.css" />
+    <link rel="stylesheet" href="./assets/css/myfavcolours.css" />
+  
   </head>
 
   <body>
+    <header>
+      <h1><i class="fa-brands fa-square-js"></i> <br> Coding Quiz League Table</h1>
+    </header>
+    <main> 
     <div class="wrapper">
-      <h1>Highscores</h1>
-      <ol id="highscores"></ol>
+      <h2><span id="highScoreTitle"></span></h2>
+      <ol id="highScoresTable"></ol>
 
-      <a href="index.html"><button>Go Back</button></a>
-      <button id="clear">Clear Highscores</button>
+      <a href="index.html" target="_self" alt="click to go to home page" title="Home page"><button>Go Back</button></a>
+      <button id="clear" class="visibleInline">Clear Scores</button>
+      <button id="startButton" class="hide">Start Quiz</button>
     </div>
-
-    <script src="./assets/js/scores.js"></script>
+    </main>
+    <footer>
+      <div class="footerTags">
+        <i class="fa fa-leaf" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp; #HaveTimeDrinkTea &nbsp;&nbsp;&nbsp; <i class="fa fa-heart" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp; #Kindfulness &nbsp;&nbsp;&nbsp; <i class="fa fa-coffee aria-hidden="true"></i> &nbsp;&nbsp;&nbsp; #TeahouseStirrings
+      </div>
+        <nav>
+          <a href="mailto:havetimedrinktea@gmail.com" alt="Click this icon to email Pei Wang" title="email Pei Wang"> <i class="fa fa-envelope-open" aria-hidden="true"></i></a>
+          &nbsp;&nbsp;&nbsp; <a href="https://www.github.com/havetimedrinktea/" alt="Click this icon to visit Pei Wang's Github page." title="Visit Pei Wang's GitHub page" target="_blank"> <i class="fab fa-github" aria-hidden="true"></i></a>
+          &nbsp;&nbsp;&nbsp; <a href="https://www.linkedin.com/in/teanamu" alt="Click this icon to visit Pei Wang's LinkedIn profile." target="_blank"> <i class="fab fa-linkedin" aria-hidden="true"></i></a>
+          &nbsp;&nbsp;&nbsp; <a href="https://www.facebook.com/havetimedrinktea/" alt="Click this icon to visit Pei Wang's Facebook feed." title="Pei's facebook page" target="_blank"> <i class="fab fa-facebook" aria-hidden="true"></i></a>
+        </nav>
+        <div class="footerP">
+          made with hours of dabbling in <i class="fa-brands fa-square-js"></i> and with many <i class="fa fa-coffee" aria-hidden="true"></i> of tea!
+        </div>
+        <div class="footerCopyright">
+          <strong><i class="fa fa-copyright" aria-hidden="true"></i> 2023 PEI WANG</strong>
+        </div>
+      </div>
+      </p>
+    </footer>
+    <script src="./assets/scripts/scores.js"></script>
   </body>
 </html>
