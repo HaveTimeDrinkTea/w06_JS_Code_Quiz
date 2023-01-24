@@ -215,6 +215,11 @@ li {
   background-color: var(--colorTealMedium);
 }
 
+li:hover {
+  background-color: var(--colorMustard);
+  cursor: grab;
+}
+
 /* li:nth-child(odd) {
   background-color: #f3edfc;
 } */
@@ -314,4 +319,21 @@ li {
 
 #highScoreTitle {
   padding: 5px;
+}
+
+.inputScoreUser {
+  font-size: 1.5rem;
+  max-width: 90%;
+  background-color: var(--colorBrown1);
+  padding: 1rem;
+  margin: 10px auto
+}
+
+
+.inputScoreRetake {
+  font-size: 1.5rem;
+  max-width: 90%;
+  background-color: var(--colorTealDark);
+  padding: 1rem;
+  margin: 0px auto;
 }

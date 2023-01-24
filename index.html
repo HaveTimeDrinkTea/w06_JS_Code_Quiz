@@ -25,16 +25,16 @@
     <main>
     <div class="wrapper">
       <div id="timer" class="hide">
-        Time<span id="timeCountDown">: 0s</span>
+        <span id="timeCountDown"></span>
         <span id="penaltyMsg" class="hide"></span>
 
       </div>
       <div id="startScreen" class="start">
         <p>
-          Test your skills in this <i class="fa-brands fa-square-js" style="font-size: 2rem;"></i> timed quiz. 
-          <br>There are a total of <strong>THREE questions </strong>in each quiz session.
-          <br>You have <strong>FIVE seconds</strong> to answer each multiple choice question. 
-          <br>Incorrect answer will penalize your time by <strong>THREE seconds</strong>.
+          Test your skills in this timed <i class="fa-brands fa-square-js" style="font-size: 2rem;"></i> quiz!
+          <br>There are a total of <strong>THREE QUESTIONS</strong> in each quiz session.
+          <br>You have <strong>SIX SECONDS</strong> to answer each multiple choice question. 
+          <br>Incorrect answer will penalize your time by <strong>TWO SECONDS</strong>.
           <br><i class="fa-solid fa-clover"></i> Good luck! <i class="fa-solid fa-clover"></i>
         </p>
         <button id="startButton">Start Quiz</button>
@@ -47,20 +47,21 @@
       </div>
 
       <div id="endScreen" class="hide">
-        <h2><i class="fa-brands fa-square-js"></i> Quiz Completed</h2>
-        <p class="msg">
-          <span id="userScoreMsg"></span>
-        </p>        
-        <p class="inputScore">
+
+        <div class="inputScoreUser">
+          <h2><i class="fa-brands fa-square-js"></i> Quiz Completed</h2>
+          <p class="msg">
+            <span id="userScoreMsg"></span>
+          </p>        
           Enter initials: <input type="text" id="initials" max="3" />
           <button id="submitUser">Submit</button>
-        </p>
+        </div>
         <div id="feedback" class="hide"><span id="highScoreMsg"></span></div>
         <br><br>
-        <p class="inputScore"> Do you want to take the quiz again? 
-          <button id="restartButton">Restart Quiz</button>
-          <br> <span style="font-size:0.8rem; font-style: italic;">(without saving your current score)</span>
-        </p>
+        <div class="inputScoreRetake"> Do you want to take the quiz again? 
+          <button id="backButton">No</button>
+          <button id="restartButton">Yes</button>
+        </div>
       </div>
       
     </div>

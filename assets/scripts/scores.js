@@ -1,10 +1,10 @@
 // define variables
-var highScoresTableOLElQ = document.querySelector("#highScoresTable");
+const highScoresTableOLElQ = document.querySelector("#highScoresTable");
 
-var highScoresTitleEllQ = document.querySelector("#highScoreTitle");
+const highScoresTitleEllQ = document.querySelector("#highScoreTitle");
 
-var clearButtonElQ = document.querySelector("#clear");
-var startButtonElQ = document.querySelector("#startButton");
+const clearButtonElQ = document.querySelector("#clear");
+const reStartButtonElQ = document.querySelector("#reStartButton");
 
 
 var userStatsStored = JSON.parse(localStorage.getItem("userStats"));
@@ -20,7 +20,11 @@ if (userStatsStored === null) {
 
 } else {
     for (let i = 0; i < userStatsStored.length; i++) {
-            highScoresTableData = highScoresTableData + "<li>" + (userStatsStored[i].userInitials).toUpperCase() + " (" + userStatsStored[i].userScore + ")" + "</li>";
+            let pointsText = "points";
+            if (userStatsStored[i].userScore < 1) {  
+                pointsText = "point"; 
+            }; 
+            highScoresTableData = highScoresTableData + "<li>" + (userStatsStored[i].userInitials).toUpperCase() + " --- [" + userStatsStored[i].userScore + " " + pointsText + "]" + "</li>";
         };
         
     highScoresTitleEllQ.setAttribute("class","visibleInline");
@@ -36,7 +40,6 @@ function clearHighScores() {
     window.localStorage.removeItem("userStats");
     highScoresTableOLElQ.innerHTML = "All the high score stats has been cleared! <br><br> Now you can conquer this quiz all over again!";
     clearButtonElQ.setAttribute("class","hide");
-    startButtonElQ.setAttribute("class","visibleInline");
 }
 
 
@@ -44,6 +47,7 @@ clearButtonElQ.addEventListener("click", function(event) {
     clearHighScores();
 }
 );
+
 
 
 

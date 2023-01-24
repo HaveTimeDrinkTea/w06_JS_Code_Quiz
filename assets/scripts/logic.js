@@ -1,25 +1,26 @@
 // Get HTML elements
-var highScoresDivElQ = document.querySelector("#highScores");
-var timerDivElQ = document.querySelector("#timer");
-var timeCountDownSpanElQ= document.querySelector("#timeCountDown");
-var timerPenaltyMsgSpanElQ= document.querySelector("#penaltyMsg");
+const highScoresDivElQ = document.querySelector("#highScores");
+const timerDivElQ = document.querySelector("#timer");
+const timeCountDownSpanElQ= document.querySelector("#timeCountDown");
+const timerPenaltyMsgSpanElQ= document.querySelector("#penaltyMsg");
 
-var startScreenDivElQ = document.querySelector("#startScreen");
-var startButtonElQ = document.querySelector("#startButton");
+const startScreenDivElQ = document.querySelector("#startScreen");
+const startButtonElQ = document.querySelector("#startButton");
 
-var endScreenDivElQ = document.querySelector("#endScreen");
-var restartButtonElQ = document.querySelector("#restartButton");
-var userScoreMsgSpanElQ = document.querySelector("#userScoreMsg");
+const endScreenDivElQ = document.querySelector("#endScreen");
+const restartButtonElQ = document.querySelector("#restartButton");
+const backButtonElQ = document.querySelector("#backButton");
+const userScoreMsgSpanElQ = document.querySelector("#userScoreMsg");
 
-var questionsDivElQ = document.querySelector("#questionsDiv");
-var questionTitleElQ = document.querySelector("#questionTitle");
-var questionChoicesDivElQ = document.querySelector("#questionChoicesDiv");
-var answerMsgDivElQ = document.querySelector("#answerMsgDiv");
+const questionsDivElQ = document.querySelector("#questionsDiv");
+const questionTitleElQ = document.querySelector("#questionTitle");
+const questionChoicesDivElQ = document.querySelector("#questionChoicesDiv");
+const answerMsgDivElQ = document.querySelector("#answerMsgDiv");
 
-var initialsInputElQ = document.querySelector("#initials");
-var userSubmitBtnElQ = document.querySelector("#submitUser");
-var feedbackDivElQ = document.querySelector("#feedback");
-var highScoreMsgSpanElQ = document.querySelector("#highScoreMsg");
+const initialsInputElQ = document.querySelector("#initials");
+const userSubmitBtnElQ = document.querySelector("#submitUser");
+const feedbackDivElQ = document.querySelector("#feedback");
+const highScoreMsgSpanElQ = document.querySelector("#highScoreMsg");
 
 
 
@@ -40,10 +41,12 @@ var questionSecAllowed; // 5 secs per question
 var userScoreCurr = 0;
 var penaltyCount = 0;
 var secondsDeducted = 0;
-var wrongAnsTimeDeduct = 3; 
+var wrongAnsTimeDeduct = 2; 
 
 // Array to hold user stats in the local storage
 var userStatsArray;
+
+// get the restart game flag from local storage. This is set by the highScores.html. If flag is true then run the quiz immediately 
 
 
 // initialization
@@ -55,38 +58,46 @@ function initQuiz() {
     chosenQuestion = [];
     userScoreCurr = 0;
     numQuestionReq = 3;
-    questionSecAllowed = 5;
+    questionSecAllowed = 6;
     timerCount = questionSecAllowed * numQuestionReq; 
     userAnswer = "";
     correctAnswer = "";
+    penaltyCount = 0;
+    secondsDeducted = 0;
+    timerDivElQ.setAttribute("class", "hide");
+    timerPenaltyMsgSpanElQ.innerHTML = "";
+    timeCountDownSpanElQ.textContent = "";
 }
+
+// initialize the page on load
+initQuiz();
 
 //- Create timer function
 
 function startTimer() {
-    timerDivElQ.setAttribute("class", "timer");
     // Sets timer
     timer = setInterval(function() {
         timerCount--;
 
-        timeCountDownSpanElQ.textContent = ": " + timerCount + "s left";
+        timeCountDownSpanElQ.textContent = "Time: " + timerCount + "s left";
         if (timerCount >= 0) {
         // Tests if win condition is met
             if (!(quizActive) && timerCount > 0) {
                 // Clears interval and stops timer
                 clearInterval(timer);
-                timeCountDownSpanElQ.textContent = ": " + timerCount + "s left";
+                timeCountDownSpanElQ.textContent = "Time: " + timerCount + "s left";
             };
         }
         // Tests if time has run out
         if (timerCount === 0) {
             // Clears interval
             clearInterval(timer);
-            timeCountDownSpanElQ.textContent = " is up!";
+            timeCountDownSpanElQ.textContent = "Time is up!";
             quizActive = false;
             endQuiz();
         };
     }, 1000);
+    timerDivElQ.setAttribute("class", "timer");
 }
 
 
@@ -94,18 +105,25 @@ function startTimer() {
 // Start or restart the Quiz with event listeners
 
 startButtonElQ.addEventListener("click", function(event) {
-    initQuiz()
-    renderQuestion();
+    initQuiz();
     startTimer();
+    renderQuestion();
 }
 );
 
 restartButtonElQ.addEventListener("click", function(event) {
     initQuiz();
-    renderQuestion();
     startTimer();
-}
-);
+    renderQuestion();
+});
+
+backButtonElQ.addEventListener("click", function(event) {
+    highScoresDivElQ.setAttribute("class","visible");
+    startScreenDivElQ.setAttribute("class","visible");
+    timerDivElQ.setAttribute("class","hide");
+    questionsDivElQ.setAttribute("class","hide");
+    endScreenDivElQ.setAttribute("class","hide");
+});
 
 
 // Rendering the questions
@@ -138,7 +156,7 @@ function renderQuestion() {
     // make the relevant div to be visible or hidden
     highScoresDivElQ.setAttribute("class","hide");
     startScreenDivElQ.setAttribute("class","hide");
-    timerPenaltyMsgSpanElQ.setAttribute("class","hide");
+    timerPenaltyMsgSpanElQ.setAttribute("class","visible");
     endScreenDivElQ.setAttribute("class","hide");
     feedbackDivElQ.setAttribute("class","hide");
     questionsDivElQ.setAttribute("class","visible");
@@ -179,7 +197,6 @@ function activeQuiz(event) {
 // apply penalty if answer is wrong
 
 function checkAnswer() {
-    console.log("checkAns== userAnswer is", userAnswer,"vs correctAnswer is", correctAnswer);
     if ( (userAnswer === correctAnswer)) {
         answerMsgDivElQ.innerHTML = "<i class='fa-solid fa-face-smile-halo'></i> Correct!!!!! 🙆🏻‍♂️";
         userScoreCurr ++;
@@ -209,9 +226,9 @@ function endQuiz() {
     
     //- set user score messages
     if (userScoreCurr === numQuestionReq) {
-        userScoreMsgSpanElQ.innerHTML = "<i class='fa-solid fa-trophy-star'></i>Very Well done! You have a perfect score of " + userScoreCurr + " out of " + numQuestionReq +"!";
+        userScoreMsgSpanElQ.innerHTML = "<i class='fa-regular fa-face-grin'></i> Well done! You have a perfect score of " + userScoreCurr + " out of " + numQuestionReq +"!";
     } else if ((userScoreCurr > 0) && (userScoreCurr < numQuestionReq)) {
-        userScoreMsgSpanElQ.innerHTML = "<i class='fa-solid fa-face-unamused'></i> Close but no cigar! Your score is " + userScoreCurr + ". <br> Aim for perfect score next time! <br> <i class='fa-solid fa-person-digging'></i> You can do it!";
+        userScoreMsgSpanElQ.innerHTML = "<i class='fa-regular fa-face-meh'></i> Close but no cigar! Your score is " + userScoreCurr + ". <br> Aim for perfect score next time! <br> <i class='fa-solid fa-person-digging'></i> You can do it!";
     } else {
         userScoreMsgSpanElQ.innerHTML = "<i class='fa-solid fa-face-grimace'></i> Oh dear! Your score is " + userScoreCurr + ". <br> Please try harder! <i class='fa-solid fa-dumbbell'></i> You can make it!";
     };
@@ -299,6 +316,5 @@ function prepHighScore() {
 }
 
 
-// initialize the page on load
-initQuiz();
+
 
