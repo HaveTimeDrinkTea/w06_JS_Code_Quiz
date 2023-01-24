@@ -34,7 +34,7 @@ var questionsArray = [
     },
     {
         // question 4
-        question: "<code> a = 5 + '9'; <br>document.write(a);</code>",
+        question: "<pre><code><script type='text/javascript'>a = 5 + '9'; <br>document.write(a);</script></code></pre>",
         option: {
             a: "Compilation Error",
             b: "14",
