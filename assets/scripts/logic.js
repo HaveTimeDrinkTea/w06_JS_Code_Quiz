@@ -1,25 +1,25 @@
 // Get HTML elements
-var highScoresDivElQ = document.querySelector("#highScores");
-var timerDivElQ = document.querySelector("#timer");
-var timeCountDownSpanElQ= document.querySelector("#timeCountDown");
-var timerPenaltyMsgSpanElQ= document.querySelector("#penaltyMsg");
+const highScoresDivElQ = document.querySelector("#highScores");
+const timerDivElQ = document.querySelector("#timer");
+const timeCountDownSpanElQ= document.querySelector("#timeCountDown");
+const timerPenaltyMsgSpanElQ= document.querySelector("#penaltyMsg");
 
-var startScreenDivElQ = document.querySelector("#startScreen");
-var startButtonElQ = document.querySelector("#startButton");
+const startScreenDivElQ = document.querySelector("#startScreen");
+const startButtonElQ = document.querySelector("#startButton");
 
-var endScreenDivElQ = document.querySelector("#endScreen");
-var restartButtonElQ = document.querySelector("#restartButton");
-var userScoreMsgSpanElQ = document.querySelector("#userScoreMsg");
+const endScreenDivElQ = document.querySelector("#endScreen");
+const restartButtonElQ = document.querySelector("#restartButton");
+const userScoreMsgSpanElQ = document.querySelector("#userScoreMsg");
 
-var questionsDivElQ = document.querySelector("#questionsDiv");
-var questionTitleElQ = document.querySelector("#questionTitle");
-var questionChoicesDivElQ = document.querySelector("#questionChoicesDiv");
-var answerMsgDivElQ = document.querySelector("#answerMsgDiv");
+const questionsDivElQ = document.querySelector("#questionsDiv");
+const questionTitleElQ = document.querySelector("#questionTitle");
+const questionChoicesDivElQ = document.querySelector("#questionChoicesDiv");
+const answerMsgDivElQ = document.querySelector("#answerMsgDiv");
 
-var initialsInputElQ = document.querySelector("#initials");
-var userSubmitBtnElQ = document.querySelector("#submitUser");
-var feedbackDivElQ = document.querySelector("#feedback");
-var highScoreMsgSpanElQ = document.querySelector("#highScoreMsg");
+const initialsInputElQ = document.querySelector("#initials");
+const userSubmitBtnElQ = document.querySelector("#submitUser");
+const feedbackDivElQ = document.querySelector("#feedback");
+const highScoreMsgSpanElQ = document.querySelector("#highScoreMsg");
 
 
 
