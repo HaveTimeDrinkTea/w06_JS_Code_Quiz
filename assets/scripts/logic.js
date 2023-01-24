@@ -21,50 +21,45 @@ var userSubmitBtnElQ = document.querySelector("#submitUser");
 var feedbackDivElQ = document.querySelector("#feedback");
 var highScoreMsgSpanElQ = document.querySelector("#highScoreMsg");
 
-//- initialize
-var quizActive = true;
-var numQuestionReq = 3;
 
-function init() {
-    quizActive = true;
-    userScoreMsg = "";
-};
 
 // Set timer
 
 var timer;
 var timerCount;
-
+var quizActive = true;
 
 // set quiz related variables
-var numQuestionMax = questionsArray.length;
-var numQuestionCount = 0;
-var chosenQuestion = [];
-var questionsToChooseArray = questionsArray;
+// var numQuestionMax = questionsArray.length;
+var numQuestionReq;
+var numQuestionCount;
+var chosenQuestion;
+var questionsToChooseArray;
+var questionSecAllowed; // 5 secs per question
 
 // Scores and penalty
 var userScoreCurr = 0;
-
-    //- number of seconds to deduct if wrong answer given
 var penaltyCount = 0;
 var secondsDeducted = 0;
-
 var wrongAnsTimeDeduct = 2; 
+
 // Array to hold user stats in the local storage
 var userStatsArray;
+
 
 // initialization
 
 function initQuiz() {
     quizActive = true;
-    questionsToChooseArray = questionsArray;
+    questionsToChooseArray = Array.from(questionsArray);
     numQuestionCount = 0;
     chosenQuestion = [];
     userScoreCurr = 0;
-    timerCount = 5 * numQuestionReq; // * 15s per question
+    numQuestionReq = 3;
+    questionSecAllowed = 5;
+    timerCount = questionSecAllowed * numQuestionReq; 
     userAnswer = "";
     correctAnswer = "";
-    userScoreMsg = ""; 
 }
 
 
@@ -75,7 +70,7 @@ function startTimer() {
     // Sets timer
     timer = setInterval(function() {
         timerCount--;
-        console.log("timerCount",timerCount)
+        // console.log("timerCount",timerCount)
         timeCountDownSpanElQ.textContent = ": " + timerCount + "s left";
         if (timerCount >= 0) {
         // Tests if win condition is met
@@ -115,34 +110,30 @@ restartButtonElQ.addEventListener("click", function(event) {
 );
 
 
-// PW rendering the questions
-
+// Rendering the questions
 //- create a new array to hold all the questions first and then once the question is picked by getQuizQuestion() it will be removed from this array so that repeated questions will not be shown
 
-
+// Get the question first. Making sure there are no repeats
 function getQuizQuestion() {
+    console.log("questionsToChooseArray length:", questionsToChooseArray.length);
 
     let randomIndex = Math.floor(Math.random() * questionsToChooseArray.length);
 
     console.log("randomIndex", randomIndex);
-
     chosenQuestion = [];
     chosenQuestion.push(questionsToChooseArray[randomIndex]);
-
     console.log("chosenQuestion:",chosenQuestion);   
+    // remove the chosen question from the array of questions
     if (questionsToChooseArray.length > 0) {
         questionsToChooseArray.splice(randomIndex,1);
     };
     console.log("questionsToChooseArray:",questionsToChooseArray);
-
+    console.log("questions left:",questionsToChooseArray.length);
     numQuestionCount++;
 };
 //- end of function questionsToChooseArray()
 
-var userAnswer;
-var correctAnswer;
-var userScoreMsg;
-
+// render the question.
 function renderQuestion() {
 
     if (numQuestionCount < numQuestionReq) {
@@ -223,7 +214,9 @@ function endQuiz() {
         //- end the quiz
         console.log("finish!!!!");
         quizActive = false;
+
         console.log("quizActive", quizActive);
+        console.log("questionsToChooseArray length:",questionsToChooseArray.length);
         highScoresDivElQ.setAttribute("class","scores");
         endScreenDivElQ.setAttribute("class","visible");
 
@@ -331,7 +324,6 @@ function prepHighScore() {
     };
 }
 
-// console.log(questionsToChooseArray);
 
 
 initQuiz();
