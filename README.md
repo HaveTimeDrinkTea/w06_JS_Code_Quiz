@@ -12,28 +12,19 @@ The JScript will produce the output dyanmically to the webpage pages as part of 
 
 
 ### Methodology: Pseudo Code
-* Create a function to generate Confirm dialog boxes to ask user for inputs(password length and choice of character sets) when a button is pressed
-* Store user inputs into variables.
-* Conduct user input validation such that 
-  * password length to be between 10 and 64 (inclusive) and 
-  * at least one of the 4 character sets (numeric, special, lower case and upper case letters) must be included. Use the default parameters where necessary.
-* Create functions to
-  * create a main array of character sets based on user/default inputs, 
-  * randomly sort this main array using the Fisher-Yates method, 
-  * for each character in the password, generate a random integer that will pick up a character from this main array and 
-  * concatenate each character to form the desired password.
-* Return the generated password to the web page
-* Display default/user password generating input parameters on the webpage 
-  * on page load (display default inputs) and 
-  * when the button to generate password is clicked (display user inputs and where they fail the validation tests then display the default input parameters).
-
+* Prepare a question bank in an array of objects. Each question and answer pair is to be created as an object.
+* Ensure that questions in each quiz are not repeated
+* Prepare functions for the following features:
+  * a timer that has checks for quiz completion and will end quiz if user has not complete before the time limit.
+  * check user answer and store the score 
+  * if the user input a wrong answer, timer will be affected by reducing the time by 3 seconds.
+  * add event listeners for the start and restart quiz buttons and also when user clicked a mcq answer.
 
 
 ### Further Improvements
 
-* to use bootstrap modal component to display the default (not visually appealing) Confirm dialog boxes. This allows me to style the modal boxes.
-* The copy button uses document.execCommand that is deprecated. Need to do further research on Clipboard API.
-* Check for user accessibility and load speed.
+* To allow users to input the number of questions to be included in a quiz and / or the amount of time allowed or each question. This can be implemented using FORM and event listeners in the homepage.
+* To set up an even larger bank of questions or categories of questions.
 
 
 
@@ -51,14 +42,19 @@ SO THAT I can guage my progress compared to my peers.
 ## Acceptance Criteria
 
 GIVEN I am taking a code quiz
+
 WHEN I click the start button
 THEN a timer starts and I am presented with a question
+
 WHEN I answer a question
 THEN I am presented with another question
+
 WHEN I answer a question incorrectly
 THEN time is subtracted from the clock
+
 WHEN all questions are answered or the timer reaches 0
 THEN the game is over
+
 WHEN the game is over
 THEN I can save my initials and score
 
@@ -80,17 +76,28 @@ N.A.
 
 ## Usage 
 
-Screen dump of the submitted webpage:
+Screen dump of the submitted webpages:
+
+### Quiz Home Page
+![Deployed Webpage](assets/images/js_quiz_homepage.png)
 
 
-![Deployed Webpage](assets/images/password_generator_pei_wang.png)
+### Quiz Question Page
+![Deployed Webpage](assets/images/js_quiz_homepage_questions.png)
 
+
+### Quiz End Page
+![Deployed Webpage](assets/images/js_quiz_homepage_quiz_end.png)
+
+
+### Quiz High Scores League Table
+![Deployed Webpage](assets/images/js_quiz_homepage_highscore.png)
 
 
 ## Credits
 
-* Customize copy textarea content code from [Morhero](https://codepen.io/MORHERO/pen/JLPzyB).  Please note that this code uses document.execCommand which is deprecated and I will need to do further research on Clipboard API instead.
-* Randomly sort an array using the Fisher-Yates method [W3Schools - JavaScript Sorting Arrays](https://www.w3schools.com/js/js_array_sort.asp)
+* JavaScript quiz questions taken from [interviewbit.com](https://www.interviewbit.com/javascript-mcq/).
+
 
 
 ## License 
@@ -102,25 +109,21 @@ MIT License
 ## Features
 
 ### Main Features
-* an online password generator on a styled webpage
-* show the user a randomly generated password based on the default parameters on page load
-* allow a user to generate a randomly generated password based on user's choice of 
-  * password length and character set(s) by clicking a button.
-  * check user parameter inputs: 
-    * password length has to be an integer otherwise the default number of 12 will be used
-    * password length has to be between 10 and 64 inclusive 
-    * include at least one of the 4 character sets has to be chosen otherwise all the 4 character sets will be taken as default.
-* Prepare a main array of the character set(s).
-* Randomly sort the array using the Fisher-Yates method
-* Generate a random number to be used as the index to the sorted array to pick up a character
-* Concatenate each character to form the password of desired length.
-* Display the password to the webpage textarea.
+* A Styled homepage with dynamically displayed quiz section at the click of a button
+  * Each quiz has 3 questions and a total of 15 seconds to complete. 
+  * The quiz questions are selected from a quiz bank of 20 questions and each question will not be repeated in each quiz
+  * Upon clicking an answer, the user is presented with the next question until there are no more questions or that the time has run out.
+  * When the user selects the wrong answer, the total time left will be reduced by 3 seconds. This penalty information will be shown when the quiz completes.
+* At the end of the quiz, the user is
+  * presented with a custom message about their score
+  * given the option to submit their name and the current score for adding to the league table.
+    * the league table stores top 3 users and if the current score is not more than the lowest score held in the client side local storage, then the user is presented with the approprite message.
+    * if the score is higher than the lowest score held in the client side local storage, then it will be inserted into the league table with the previous low score being removed.
+    * if there are less than 3 scores in the league table, then the user's current score will be inserted into the league table.
+  * The user will also be given the option of restarting the quiz without storing their current score.
+* Users can view the high scores league table by clicking on the High Score link at the top of the home page  
 
 
 
-### Extra Features
-* Generate a password on page load based on default parameters
-* Copy button in the textarea for user to copy the password to clipboard. [See Further Improvements](#description)
-* Styled the webpage and included contact details.
 
 
