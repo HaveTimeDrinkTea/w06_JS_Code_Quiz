@@ -34,14 +34,14 @@ const questionsArray = [
     },
     {
         // question 4
-        question: "<pre><code><script type='text/javascript'>a = 5 + '9'; <br>document.write(a);</script></code></pre>",
+        question: "What will be the output of the following code snippet? <pre><code>a = 5 + '9'; <br>console.log(a);</code></pre>",
         option: {
             a: "Compilation Error",
             b: "14",
             c: "Runtime Error",
             d: "59",
         },
-        answer: "a",
+        answer: "d",
     },
     {
         // question 5
@@ -100,18 +100,18 @@ const questionsArray = [
     },  
     {
         // question 10
-        question: "What is the use of the <noscript> tag in Javascript?",
+        question: "What is the output of the following code? <pre><code>let sum = 0; <br>const a = [1, 2, 3]; <br>function getSum(ele) { <br>   sum += ele; <br>} <br>a.forEach(getSum); <br>console.log(sum); </code></pre>",
         option: {
-            a: "The contents are displayed by non-JS-based browsers.",
-            b: "Clears all the cookies and cache.",
-            c: "Both of the above",
+            a: "6",
+            b: "1",
+            c: "2",
             d: "None of the above",
         },
         answer: "a",
     },     
     {
         // question 11
-        question: "What does the ‘toLocateString()’ method do in JS?",
+        question: "What does the following method do in JavaScript? <pre><code>toLocateString()</code></pre>",
         option: {
             a: "Returns a localized object representation.",
             b: "Returns a parsed string.",
@@ -177,7 +177,7 @@ const questionsArray = [
     }, 
     {
         // question 17
-        question: "What is the output of the <code>console.log(NaN === NaN);</code>?",
+        question: "What is the output of the following? <pre><code>console.log(NaN === NaN);</code></pre>",
         option: {
             a: "true",
             b: "false",
@@ -188,7 +188,7 @@ const questionsArray = [
     }, 
     {
         // question 18
-        question: "What will be the output of <code>console.log(typeof(NaN));</code>?",
+        question: "What will be the output of the following? <pre><code>console.log(typeof(NaN));</code></pre>",
         option: {
             a: "Object",
             b: "Number",
@@ -199,24 +199,24 @@ const questionsArray = [
     }, 
     {
         // question 19
-        question: "TEMP 19:What will be the output of <code>console.log(typeof(NaN));</code>?",
+        question: "What will be the output of the following? <pre><code>var a = 1; <br>var b = 0; <br>while (a <= 3) { <br>  a++; <br>  b += a * 2; <br>  console.log(b); <br>};</code></pre>",
         option: {
-            a: "Object",
-            b: "Number",
-            c: "String",
+            a: "4 then 10 then 18",
+            b: "1 then 2 then 3",
+            c: "1 then 4 then 7",
             d: "None of the above",
         },
-        answer: "b",
+        answer: "a",
     }, 
     {
         // question 20
-        question: "TEMP20: What will be the output of <code>console.log(typeof(NaN));</code>?",
+        question: "What will be the output of the following? <pre><code>var a = true + true + true * 3; <br>console.log(a);</code></pre>",
         option: {
-            a: "Object",
-            b: "Number",
-            c: "String",
-            d: "None of the above",
+            a: "3",
+            b: "0",
+            c: "Undefined",
+            d: "5",
         },
-        answer: "b",
+        answer: "d",
     },              
 ];
