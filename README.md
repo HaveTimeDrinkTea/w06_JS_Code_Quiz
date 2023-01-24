@@ -82,16 +82,25 @@ Screen dump of the submitted webpages:
 ![Deployed Webpage](assets/images/js_quiz_homepage.png)
 
 
-### Quiz Question Page
+
+### Question Page Demo 1
 ![Deployed Webpage](assets/images/js_quiz_homepage_questions.png)
+
+
+
+### Question Page Demo 2
+![Deployed Webpage](assets/images/js_quiz_homepage_questions2.png)
+
 
 
 ### Quiz End Page
 ![Deployed Webpage](assets/images/js_quiz_homepage_quiz_end.png)
 
 
+
 ### Quiz High Scores League Table
 ![Deployed Webpage](assets/images/js_quiz_homepage_highscore.png)
+
 
 
 ## Credits
