@@ -196,8 +196,8 @@ function activeQuiz(event) {
 // function to verify user's answer input
 // apply penalty if answer is wrong
 
-const audioCorrect = new Audio("../assets/sfx/correct.wav");
-const audioWrong = new Audio("../assets/sfx/incorrect.wav");
+const audioCorrect = new Audio("assets/sfx/correct.wav");
+const audioWrong = new Audio("assets/sfx/incorrect.wav");
 
 function checkAnswer() {
     if ( (userAnswer === correctAnswer)) {
