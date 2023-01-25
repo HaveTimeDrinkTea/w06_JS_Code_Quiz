@@ -208,11 +208,10 @@ function checkAnswer() {
         audioWrong.play();
         answerMsgDivElQ.innerHTML = "<i class='fa-regular fa-face-woozy'></i> uh oh! Wrong answer!!!!! 🙅🏻‍♂️";
         timerCount = timerCount - wrongAnsTimeDeduct; // time reduced by 3s if answer is wrong
-        
+        penaltyCount ++;
+        secondsDeducted = penaltyCount * wrongAnsTimeDeduct;       
         timerPenaltyMsgSpanElQ.setAttribute("class","visible");
         timerPenaltyMsgSpanElQ.innerHTML = "Penalty: " + penaltyCount + "<br>Total Seconds Deducted: " + secondsDeducted;
-        penaltyCount ++;
-        secondsDeducted = penaltyCount * wrongAnsTimeDeduct;
     };
 }
 
