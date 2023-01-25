@@ -128,6 +128,7 @@ MIT License
   * The quiz questions are selected from a quiz bank of 20 questions and each question will not be repeated in each quiz
   * Upon clicking an answer, the user is presented with the next question until there are no more questions or that the time has run out.
   * When the user selects the wrong answer, the total time left will be reduced by 2 seconds. This penalty information will be shown when the quiz completes.
+  * a correct answer audio and an incorrect answer audio is played when the user selects a right or wrong answer respectively.
 * At the end of the quiz, the user is
   * presented with a custom message about their score
   * given the option to submit their name and the current score for adding to the league table. The league table stores top 3 users held in the client side local storage area.
