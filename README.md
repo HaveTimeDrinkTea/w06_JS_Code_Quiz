@@ -8,7 +8,7 @@ It requires us to use JScript objects, client-side storage, browser events to bu
 
 The JScript will produce the output dyanmically to the webpage pages as part of the starter code provided. I've tried to group repeatedly called Jscript codes into modular functions where possible.
 
-To make it easier to evaluate this application, I have deliberately set the quiz to take only 3 questions from a question bank of 20 and set each question and to allow a total of 18 seconds to answer them. The application is coded in such a way these parameters can be changed easily.
+(***To make it easier to evaluate this application, I have deliberately set the quiz to take only 3 questions from a question bank of 20 and to allow a total of 18 seconds to answer them.***) The application is coded in such a way these parameters can be changed easily.
 
 
 
